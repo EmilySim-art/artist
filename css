@@ -1,0 +1,10 @@
+.link-button {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #6284ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1em;
+}
