@@ -85,6 +85,8 @@ function resizeCanvas(canvas, width, height) {
   tempCanvas.width = width;
   tempCanvas.height = height;
   const ctx = tempCanvas.getContext("2d");
+  ctx.fillStyle = "#fff"; // 흰 배경
+  ctx.fillRect(0, 0, width, height);
   ctx.drawImage(canvas, 0, 0, width, height);
   return tempCanvas;
 }
