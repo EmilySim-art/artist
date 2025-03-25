@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>작품 갤러리</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      padding: 40px;
+      background-color: #f7faff;
+      text-align: center;
+      color: #2c3e50;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    a.link-button {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 10px 16px;
+      background-color: #4a90e2;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .art {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      background-color: white;
+      width: 260px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+    .art:hover {
+      transform: scale(1.03);
+    }
+    .art img {
+      width: 100%;
+      display: block;
+    }
+    .art .caption {
+      padding: 10px;
+      font-size: 1em;
+      color: #555;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>작품 갤러리</h1>
+  <a href="random.html" class="link-button">🎲 랜덤 낙서 보기</a>
+  <div id="gallery">로딩 중...</div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+
+  <!-- Custom JS -->
+  <script type="module">
+    import { initializeFirebase, loadGallery } from './js/script.js';
+
+    const storage = initializeFirebase();
+    loadGallery(storage);
+  </script>
+</body>
+</html>
