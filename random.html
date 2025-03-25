@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랜덤 낙서</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f5f7fa;
+      color: #2c3e50;
+    }
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 20px;
+    }
+    .art-container {
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background-color: white;
+    }
+    .art-container img {
+      width: 100%;
+      display: block;
+    }
+    .caption {
+      font-size: 1.1em;
+      padding: 15px;
+      background-color: #f2f2f2;
+      color: #555;
+    }
+    .buttons {
+      margin-top: 30px;
+    }
+    button, .link-button {
+      margin: 10px 8px;
+      padding: 12px 20px;
+      font-size: 1em;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    button:hover, .link-button:hover {
+      background-color: #357ABD;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 랜덤 낙서 한 장</h1>
+  <div class="art-container" id="randomArt">로딩 중...</div>
+  <div class="buttons">
+    <button onclick="location.reload()">🔄 다시 뽑기</button>
+    <a href="gallery.html" class="link-button">🏠 갤러리로 돌아가기</a>
+    <a href="index.html" class="link-button">🖌️ 그리기 페이지로</a>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+
+  <!-- Custom JS -->
+  <script type="module">
+    import { initializeFirebase } from './js/script.js';
+
+    const storage = initializeFirebase();
+    const container = document.getElementById("randomArt");
+
+    storage.ref("submissions").listAll().then(res => {
+      const items = res.items;
+      if (items.length === 0) {
+        container.innerText = "아직 작품이 없습니다.";
+        return;
+      }
+      const randomItem = items[Math.floor(Math.random() * items.length)];
+      randomItem.getDownloadURL().then(url => {
+        const parts = randomItem.name.split("_");
+        const caption = parts[1]?.replace(".png", "") || "제목 없음";
+
+        container.innerHTML = `
+          <img src="${url}" alt="랜덤 낙서">
+          <div class="caption">${caption}</div>
+        `;
+      });
+    }).catch(err => {
+      container.innerText = "불러오는 중 오류 발생: " + err;
+    });
+  </script>
+</body>
+</html>
