@@ -1,10 +1,18 @@
-.link-button {
+/* 기본 버튼 (링크 포함) 스타일 */
+.link-button,
+.tools a.btn-link {
   display: inline-block;
   margin: 5px;
   padding: 10px 15px;
+  font-size: 1em;
   background-color: #6284ff;
   color: white;
   text-decoration: none;
   border-radius: 6px;
-  font-size: 1em;
+  transition: background-color 0.2s;
+}
+
+.tools a.btn-link:hover,
+.link-button:hover {
+  background-color: #476cd1;
 }
