@@ -1,6 +1,6 @@
-/* 기본 버튼 (링크 포함) 스타일 */
-.link-button,
-.tools a.btn-link {
+/* 공통 버튼 및 링크 스타일 */
+button,
+.link-button {
   display: inline-block;
   margin: 5px;
   padding: 10px 15px;
@@ -8,11 +8,21 @@
   background-color: #6284ff;
   color: white;
   text-decoration: none;
+  border: none;
   border-radius: 6px;
+  cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.tools a.btn-link:hover,
+/* 버튼 hover 효과 */
+button:hover,
 .link-button:hover {
   background-color: #476cd1;
+}
+
+/* 제출 상태 텍스트 */
+#submitStatus {
+  margin-top: 10px;
+  font-size: 0.95em;
+  color: #333;
 }
